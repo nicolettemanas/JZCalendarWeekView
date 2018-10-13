@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F7DCB57217249B000285D4A /* JZWeekendBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DCB56217249B000285D4A /* JZWeekendBackground.swift */; };
 		1FB6140D2130FE7400F08ACD /* JZCurrentTimelinePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6140C2130FE7400F08ACD /* JZCurrentTimelinePage.swift */; };
 		8E023C78206C6E4B00C523BE /* JZWeekViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E023C77206C6E4B00C523BE /* JZWeekViewTest.swift */; };
 		8E023C7A206C6E4B00C523BE /* JZCalendarWeekView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1BA94A206B4329007BE13C /* JZCalendarWeekView.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F7DCB56217249B000285D4A /* JZWeekendBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZWeekendBackground.swift; sourceTree = "<group>"; };
 		1FB6140C2130FE7400F08ACD /* JZCurrentTimelinePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZCurrentTimelinePage.swift; sourceTree = "<group>"; };
 		8E023C75206C6E4B00C523BE /* JZCalendarWeekViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JZCalendarWeekViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E023C77206C6E4B00C523BE /* JZWeekViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JZWeekViewTest.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				8E1BA967206B4F40007BE13C /* JZCurrentTimelineSection.swift */,
 				8E1BA96B206B5B3F007BE13C /* JZColumnHeaderBackground.swift */,
 				8E1BA96D206B5B55007BE13C /* JZRowHeaderBackground.swift */,
+				0F7DCB56217249B000285D4A /* JZWeekendBackground.swift */,
 				8EF7EBCC20A55C8E00D5CEEA /* JZAllDayCorner.swift */,
 				8EF7EBCE20A55CF900D5CEEA /* JZAllDayHeader.swift */,
 				8EF7EBD020A55D1000D5CEEA /* JZAllDayHeaderBackground.swift */,
@@ -311,6 +314,7 @@
 				8E21E8B020916A96002D72D0 /* JZLongPressWeekView.swift in Sources */,
 				8EF7EBD120A55D1000D5CEEA /* JZAllDayHeaderBackground.swift in Sources */,
 				8E023C86206C956F00C523BE /* JZWeekViewColors.swift in Sources */,
+				0F7DCB57217249B000285D4A /* JZWeekendBackground.swift in Sources */,
 				8E1BA96A206B5350007BE13C /* JZWeekViewHelper.swift in Sources */,
 				8E1BA962206B4B99007BE13C /* JZRowHeader.swift in Sources */,
 			);

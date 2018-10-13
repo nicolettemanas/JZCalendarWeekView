@@ -101,7 +101,8 @@ open class JZBaseWeekView: UIView {
         
         // decoration
         flowLayout.registerDecorationViews([JZColumnHeaderBackground.self, JZRowHeaderBackground.self,
-                                            JZAllDayHeaderBackground.self, JZAllDayCorner.self])
+                                            JZAllDayHeaderBackground.self, JZAllDayCorner.self,
+                                            JZWeekendBackground.self])
         flowLayout.register(JZGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.verticalGridline)
         flowLayout.register(JZGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.horizontalGridMainline)
         flowLayout.register(JZSubLine.self, forDecorationViewOfKind: JZDecorationViewKinds.horizontalGridSubline)

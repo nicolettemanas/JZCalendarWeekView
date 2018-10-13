@@ -69,6 +69,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     var columnHeaderBackgroundAttributes = AttDic()
     var rowHeaderAttributes = AttDic()
     var rowHeaderBackgroundAttributes = AttDic()
+    var weekendBackgroundAttributes = AttDic()
     var verticalGridlineAttributes = AttDic()
     var horizontalGridlineAttributes = AttDic()
     var horizontalSublineAttributes = AttDic()
@@ -177,6 +178,8 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
 
             allAttributes.append(contentsOf: rowHeaderBackgroundAttributes.values)
             allAttributes.append(contentsOf: verticalGridlineAttributes.values)
+            allAttributes.append(contentsOf: weekendBackgroundAttributes.values)
+
             allAttributes.append(contentsOf: horizontalGridlineAttributes.values)
             allAttributes.append(contentsOf: horizontalSublineAttributes.values)
 
@@ -296,12 +299,29 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             
             layoutVerticalGridLinesAttributes(section: section, sectionX: sectionMinX, calendarGridMinY: calendarGridMinY, sectionHeight: sectionHeight)
             layoutItemsAttributes(section: section, sectionX: sectionMinX, calendarStartY: calendarGridMinY)
+
+            let day = daysForSection(section).date?.getDayOfWeek()
+            if day == DayOfWeek.Saturday || day == DayOfWeek.Sunday {
+              layoutWeekendBackgroundAttributes(section: section, sectionX: sectionMinX, calendarGridMinY: calendarGridMinY, sectionHeight: sectionHeight)
+            }
         }
         
         layoutHorizontalGridLinesAttributes(calendarStartX: calendarContentMinX, calendarStartY: calendarContentMinY)
     }
     
     // MARK: - Layout Attributes
+    func layoutWeekendBackgroundAttributes(section: Int, sectionX: CGFloat, calendarGridMinY: CGFloat, sectionHeight: CGFloat) {
+      var attributes = UICollectionViewLayoutAttributes()
+
+      (attributes, weekendBackgroundAttributes) = layoutAttributesForDecorationView(at: IndexPath(item: 0, section: section),
+                                                                                   ofKind: JZDecorationViewKinds.weekendBackground,
+                                                                                   withItemCache: weekendBackgroundAttributes)
+      attributes.frame = CGRect(x: nearbyint(sectionX - defaultGridThickness / 2.0), y: calendarGridMinY,
+                                width: sectionWidth, height: sectionHeight)
+      attributes.zIndex = zIndexForElementKind(JZDecorationViewKinds.weekendBackground)
+    }
+
+
     func layoutItemsAttributes(section: Int, sectionX: CGFloat, calendarStartY: CGFloat) {
         var attributes =  UICollectionViewLayoutAttributes()
         var sectionItemAttributes = [UICollectionViewLayoutAttributes]()
@@ -438,6 +458,8 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
             return horizontalSublineAttributes[indexPath]
         case JZDecorationViewKinds.rowHeaderBackground:
             return rowHeaderBackgroundAttributes[indexPath]
+        case JZDecorationViewKinds.weekendBackground:
+            return weekendBackgroundAttributes[indexPath]
         case JZDecorationViewKinds.columnHeaderBackground:
             return columnHeaderBackgroundAttributes[indexPath]
         case JZDecorationViewKinds.allDayHeaderBackground:
@@ -600,6 +622,7 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         
         currentTimeLineAttributes.removeAll()
         verticalGridlineAttributes.removeAll()
+        weekendBackgroundAttributes.removeAll()
         horizontalGridlineAttributes.removeAll()
         horizontalSublineAttributes.removeAll()
         columnHeaderAttributes.removeAll()
@@ -648,7 +671,8 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
         let day = delegate?.collectionView(collectionView!, layout: self, dayForSection: section)
         guard day != nil else { fatalError() }
         let startOfDay = Calendar.current.startOfDay(for: day!)
-        let dayDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfDay)
+        var dayDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfDay)
+        dayDateComponents.calendar = Calendar.current
         cachedDayDateComponents[section] = dayDateComponents
         return dayDateComponents
     }
@@ -703,27 +727,29 @@ open class JZWeekViewFlowLayout: UICollectionViewFlowLayout {
     open func zIndexForElementKind(_ kind: String) -> Int {
         switch kind {
         case JZSupplementaryViewKinds.cornerHeader, JZDecorationViewKinds.allDayCorner:
-            return minOverlayZ + 11
+            return minOverlayZ + 12
         case JZSupplementaryViewKinds.allDayHeader:
-            return minOverlayZ + 10
+            return minOverlayZ + 11
         case JZDecorationViewKinds.allDayHeaderBackground:
-            return minOverlayZ + 9
+            return minOverlayZ + 10
         case JZSupplementaryViewKinds.rowHeader:
-            return minOverlayZ + 8
+            return minOverlayZ + 9
         case JZDecorationViewKinds.rowHeaderBackground:
-            return minOverlayZ + 7
+            return minOverlayZ + 8
         case JZSupplementaryViewKinds.columnHeader:
-            return minOverlayZ + 6
+            return minOverlayZ + 7
         case JZDecorationViewKinds.columnHeaderBackground:
-            return minOverlayZ + 5
+            return minOverlayZ + 6
         case JZSupplementaryViewKinds.currentTimeline:
-            return minOverlayZ + 4
+            return minOverlayZ + 5
         case JZDecorationViewKinds.horizontalGridMainline:
-            return minBackgroundZ + 3
+            return minBackgroundZ + 4
         case JZDecorationViewKinds.horizontalGridSubline:
-            return minBackgroundZ + 2
+            return minBackgroundZ + 3
         case JZDecorationViewKinds.verticalGridline:
-            return minBackgroundZ + 1
+            return minBackgroundZ + 2
+        case JZDecorationViewKinds.weekendBackground:
+          return minBackgroundZ + 1
         default:
             return minCellZ
         }
