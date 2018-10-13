@@ -17,7 +17,8 @@ class CustomWeekView: JZBaseWeekView {
         
         self.collectionView.register(UINib(nibName: EventCell.className, bundle: nil), forCellWithReuseIdentifier: EventCell.className)
         self.flowLayout.register(BlackGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.verticalGridline)
-        self.flowLayout.register(BlackGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.horizontalGridline)
+        self.flowLayout.register(BlackGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.horizontalGridMainline)
+        self.flowLayout.register(DashedGridLine.self, forDecorationViewOfKind: JZDecorationViewKinds.horizontalGridSubline)
         self.collectionView.register(HourRowHeader.self, forSupplementaryViewOfKind: JZSupplementaryViewKinds.rowHeader, withReuseIdentifier: HourRowHeader.className)
         self.collectionView.register(CurrentTimelineAll.self, forSupplementaryViewOfKind: JZSupplementaryViewKinds.currentTimeline, withReuseIdentifier: CurrentTimelineAll.className)
     }

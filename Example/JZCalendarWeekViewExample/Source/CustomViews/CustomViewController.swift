@@ -57,7 +57,13 @@ class CustomViewController: UIViewController {
                                        scrollType: selectedData.scrollType,
                                        firstDayOfWeek: selectedData.firstDayOfWeek,
                                        visibleTime: time8AM)
-        calendarWeekView.updateFlowLayout(JZWeekViewFlowLayout(hourGridDivision: selectedData.hourGridDivision))
+
+      let flowLayout = JZWeekViewFlowLayout(
+        hourHeight: 200,
+        rowHeaderWidth: 82,
+        columnHeaderHeight: 36,
+        hourGridDivision: JZHourGridDivision.minutes_15)
+      calendarWeekView.updateFlowLayout(flowLayout)
     }
     
     override func didReceiveMemoryWarning() {

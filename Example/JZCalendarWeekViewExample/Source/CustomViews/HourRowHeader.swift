@@ -14,7 +14,7 @@ class HourRowHeader: JZRowHeader {
     
     override func setupBasic() {
         // different dateFormat
-        dateFormatter.dateFormat = "HH"
+        dateFormatter.dateFormat = "HH:mm"
         lblTime.textColor = .orange
         lblTime.font = UIFont.systemFont(ofSize: 12)
     }

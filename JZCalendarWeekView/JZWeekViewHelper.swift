@@ -21,7 +21,8 @@ public enum JZDecorationViewKinds {
     public static let allDayHeaderBackground = JZAllDayHeaderBackground.className
     public static let allDayCorner = JZAllDayCorner.className
     public static let verticalGridline = "VerticalGridline"
-    public static let horizontalGridline = "HorizontalGridline"
+    public static let horizontalGridMainline = "HorizontalGridMainline"
+    public static let horizontalGridSubline = "HorizontalGridSubline"
 }
 
 enum ScrollDirection {
